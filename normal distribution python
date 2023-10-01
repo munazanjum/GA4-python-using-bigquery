@@ -1,0 +1,38 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import scipy.stats as stats
+
+# Parameters for the normal distributions
+params = [(0, 1, 'b', '-', "Mean=0, Std Dev=1"),
+          (0, 0.5, 'g', '--', "Mean=0, Std Dev=0.5"),
+          (0, 2, 'r', '-.', "Mean=0, Std Dev=2"),
+          (1, 1, 'm', '-', "Mean=1, Std Dev=1"),
+          (-1, 1, 'c', '--', "Mean=-1, Std Dev=1")]
+
+# Create a range of x values
+x = np.linspace(-5, 5, 1000)
+
+# Create the plot
+plt.figure(figsize=(10, 6))
+
+# Plot the curves for each set of parameters
+for mean, std_dev, color, linestyle, label in params:
+    # Generate the probability density function (PDF) values
+    pdf = stats.norm.pdf(x, loc=mean, scale=std_dev)
+    
+    # Plot the PDF
+    plt.plot(x, pdf, label=label, color=color, linestyle=linestyle)
+
+# Plot the standard normal distribution curve (mean=0, std_dev=1) for reference
+std_norm_pdf = stats.norm.pdf(x, loc=0, scale=1)
+plt.plot(x, std_norm_pdf, label="Standard Normal (Mean=0, Std Dev=1)", color='k', linestyle='--')
+
+# Add labels and legend
+plt.xlabel('x')
+plt.ylabel('Probability Density')
+plt.title('Normal Distribution Curves')
+plt.legend()
+plt.grid(True)
+
+# Show the plot
+plt.show()
